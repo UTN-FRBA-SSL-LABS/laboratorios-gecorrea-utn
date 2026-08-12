@@ -338,10 +338,10 @@ Las líneas con `#####` nunca se ejecutaron — no están cubiertas por los test
 
 **P10** — ¿Hay alguna línea de `carrito.c` con `#####`? ¿Cuál y por qué no se ejecutó?
 
-> R:
+> R:SI, lineas 29 y 30, esto pasó xq la función de carrito_descuento no fue utilizada en ninguno de los test ejecutados, me olvidé de su existencia y armé dentro del test el funcionamiento esperado pero sin su empleo. 
 
 ```
-COBERTURA_COMPLETA=
+COBERTURA_COMPLETA=NO
 ```
 _(SI si todas las líneas están cubiertas, NO si hay alguna con #####)_
 
@@ -351,27 +351,27 @@ _(SI si todas las líneas están cubiertas, NO si hay alguna con #####)_
 
 **P11** — ¿Qué diferencia hay entre un test unitario y uno de integración? ¿Cuál de los dos detectó primero el bug de `carrito_total`?
 
-> R:
+> R:Un test unitario prueba una sola función aislada de las demás. Un test de integración prueba el flujo completo, viendo cómo interactúan varias funciones juntas. El bug de carrito_total lo detectó primero un test unitario
 
 **P12** — El bug de capacidad en `carrito_agregar` causa un **buffer overflow**: se escribe más allá del array. ¿Por qué esto es peligroso en C pero no ocurriría en un lenguaje como Python o Java?
 
-> R:
+> R:el lenguaje no verifica los límites de los arreglos; si le decís que escriba fuera de lugar, lo hace y corrompe la memoria. En cambio, Java o Python corren sobre entornos que verifican el tamaño del arreglo en cada paso y tiran un error de índice
 
 **P13** — En este laboratorio encontraste los bugs escribiendo tests. ¿Qué tiene de mejor este enfoque frente a mirar el código directamente?
 
-> R:
+> R:Mirando el código a ojo es fácil saltarse bugs y con los tests se automatizan las pruebas y se comprueba con datos reales que la función devuelva lo esperado.
 
 **P14** — El test `test_total_precio_unitario` (cantidad = 1) **pasó** a pesar del bug, mientras que `test_total_con_cantidad` (cantidad = 2) **falló**. ¿Por qué el primer test no detectó el bug?
 
-> R:
+> R:Como el bug de la función ignoraba la cantidad y solo sumaba precios unitarios, al ser la cantidad 1, el cálculo final daba el mismo número. Recién cuando le pasamos un 2, la casualidad se rompió y el test falló.
 
 ```
-BUG_EN_FUNCION_1=
+BUG_EN_FUNCION_1=carrito_total
 ```
 _(nombre de la función con el primer bug)_
 
 ```
-BUG_EN_FUNCION_2=
+BUG_EN_FUNCION_2=carrito_agregar
 ```
 _(nombre de la función con el segundo bug)_
 
