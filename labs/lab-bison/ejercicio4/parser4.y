@@ -36,7 +36,8 @@ input:
  */
 linea:
     exp '\n'    { printf("= %d\n", $1); }
-  ;
+  | error '\n' {yyerrok; printf("Error: sintaxis invalida\n");}
+;
 
 exp:
     exp '+' exp   { $$ = $1 + $3; }
